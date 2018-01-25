@@ -1,0 +1,38 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div id ="root">
+  <div id = "new">
+    <h1>Add a quote</h1> 
+    <form name="myform" (submit)="onCreate()">
+      <!-- use the json pipe to see how newTask changes in real time -->
+      <!-- <p> {{ newQuote | json }} </p> -->
+      <textarea id="content" name="content" [(ngModel)]="newQuote.content"></textarea>
+      <br><br>
+      <label for="newQuote.author">Author</label>
+      <input id="author" type="text" name="newQuote.author" [(ngModel)]="newQuote.author">
+      <input [id]="create" type="submit" value="Add Quote">
+    </form>
+    <br><br><br><br><br><br>
+  </div>
+
+  <div id="error" *ngIf="errors">
+    <!-- <p class="error">Error : {{ errors }}</p> -->
+    <textarea class="error" name="errors" [(ngModel)]="errors" disabled></textarea>
+  </div>
+  
+  <div id="quotes">
+    <h1>Quotes List</h1> 
+    <!-- <button (click) = "getTasksFromServiceB()">Click to get all tasks</button> -->
+    <div class="quote" *ngFor="let quote of quotes">
+      <div class="data">
+        <p>"{{ quote.content }}"</p><br>
+        <p class="author"> - {{ quote.author }}</p> <br>
+      </div>
+      <p class="ratings">  +{{ quote.rating }}</p>
+      <div class="actions">
+        <button class="UP" (click) = "vote(quote._id,'up')">Vote Up</button>
+        <button class="Down" (click) = "vote(quote._id,'down')">Vote Down</button>
+        <button class="delete" (click) = "onDelete(quote._id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
